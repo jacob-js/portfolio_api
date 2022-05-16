@@ -7,8 +7,9 @@ class ProjectsControllers {
     async projects(req: Request, res: Response){
         const { method } = req;
         if(method === 'GET'){
+            const { limit, offset } = req.query;
             try {
-                const projects = await ProjectsServices.getAllProjects();
+                const projects = await ProjectsServices.getAllProjects(limit ? parseInt(limit?.toString()): 10, offset ?parseInt(offset?.toString()): 0);
                 return sendResponse(res, 200, 'Success', projects);
             } catch (error) {
                 return sendResponse(res, 500, 'Error', error);

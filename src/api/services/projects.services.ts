@@ -2,8 +2,12 @@ import Projects from "../../db/models/Projects";
 import { WhereOptions } from 'sequelize'
 
 class ProjectsServices {
-    public static async getAllProjects(): Promise<Projects[]> {
-        return await Projects.findAll();
+    public static async getAllProjects(limit=10, offset=0): Promise<{ rows: Projects[], count: number }> {
+        return await Projects.findAndCountAll({
+            limit,
+            offset,
+            order: [['createdAt', 'DESC']]
+        });
     }
 
     public static async getProjectById(id: string): Promise<Projects | null> {

@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
+import fileUpload from 'express-fileupload';
 import apiRouter from './routes';
 import dbInit from './db/init';
 
@@ -11,6 +12,10 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '../temp'
+}));
 
 app.use('/v1', apiRouter);
 

@@ -8,6 +8,8 @@ class Projects extends Model<InferAttributes<Projects>, InferCreationAttributes<
     declare technologies: string[];
     declare url: string;
     declare image: string;
+    declare cost: number;
+    declare currency: string;
     declare createdAt: Date;
     declare updatedAt: Date;
     declare deletedAt: Date;
@@ -39,6 +41,13 @@ Projects.init(
         image: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        cost: {
+            type: DataTypes.FLOAT,
+            allowNull: true
+        },
+        currency: {
+            type: DataTypes.STRING,
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
